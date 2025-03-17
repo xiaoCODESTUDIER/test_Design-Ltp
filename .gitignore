@@ -1,0 +1,132 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/testDesign/.vs/ProjectEvaluation/testdesign.metadata.v9.bin
+/testDesign/.vs/ProjectEvaluation/testdesign.projects.v9.bin
+/testDesign/.vs/ProjectEvaluation/testdesign.strings.v9.bin
+/testDesign/.vs/testDesign/DesignTimeBuild/.dtbcache.v2
+/testDesign/.vs/testDesign/FileContentIndex/09ac202c-7b97-4030-82b2-795d896168e5.vsidx
+/testDesign/.vs/testDesign/FileContentIndex/1c8383d6-8dba-4120-aba5-44842ed274e2.vsidx
+/testDesign/.vs/testDesign/FileContentIndex/41df8fc8-3482-4e2a-8e03-e5bec712a87e.vsidx
+/testDesign/.vs/testDesign/FileContentIndex/d4872690-328c-436c-afa4-34165520df71.vsidx
+/testDesign/.vs/testDesign/FileContentIndex/e60682aa-bf12-43d1-9df2-e40199aed93c.vsidx
+/testDesign/.vs/testDesign/FileContentIndex/f9f4e95f-cd86-431a-9b8f-aa584df6f6f0.vsidx
+/testDesign/.vs/testDesign/v17/.futdcache.v2
+/testDesign/.vs/testDesign/v17/.suo
+/testDesign/.vs/testDesign/v17/DocumentLayout.backup.json
+/testDesign/.vs/testDesign/v17/DocumentLayout.json
+/.dart_tool/chrome-device/Default/Extension State/LOG
+/.dart_tool/chrome-device/Default/Extension State/LOG.old
+/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG
+/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG.old
+/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG
+/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG.old
+/.dart_tool/chrome-device/Default/Network/Reporting and NEL
+/.dart_tool/chrome-device/Default/Service Worker/Database/000003.log
+/.dart_tool/chrome-device/Default/Service Worker/Database/LOG
+/.dart_tool/chrome-device/Default/Service Worker/Database/LOG.old
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/2a0afd649b00527b_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/index-dir/the-real-index
+/.dart_tool/chrome-device/Default/Session Storage/000003.log
+/.dart_tool/chrome-device/Default/Session Storage/LOG
+/.dart_tool/chrome-device/Default/Session Storage/LOG.old
+/.dart_tool/chrome-device/Default/Sessions/Session_13383286599526180
+/.dart_tool/chrome-device/Default/Shared Dictionary/cache/index-dir/the-real-index
+/.dart_tool/chrome-device/Default/shared_proto_db/000003.log
+/.dart_tool/chrome-device/Default/shared_proto_db/LOG
+/.dart_tool/chrome-device/Default/shared_proto_db/LOG.old
+/.dart_tool/chrome-device/Default/shared_proto_db/metadata/000003.log
+/.dart_tool/chrome-device/Default/shared_proto_db/metadata/LOG
+/.dart_tool/chrome-device/Default/shared_proto_db/metadata/LOG.old
+/.dart_tool/chrome-device/Default/Sync Data/LevelDB/LOG
+/.dart_tool/chrome-device/Default/Sync Data/LevelDB/LOG.old
+/.dart_tool/chrome-device/Default/Site Characteristics Database/LOG
+/.dart_tool/chrome-device/Default/Site Characteristics Database/LOG.old
+/.dart_tool/chrome-device/Default/DIPS
+/.dart_tool/chrome-device/Default/Favicons
+/.dart_tool/chrome-device/Default/History
+/.dart_tool/chrome-device/Default/History-journal
+/.dart_tool/chrome-device/Default/Login Data
+/.dart_tool/chrome-device/Default/Preferences
+/.dart_tool/chrome-device/Default/Visited Links
+/.dart_tool/chrome-device/Default/WebStorage/QuotaManager
+/build/1906162ccb255627e94d2d17da8fe11e.cache.dill.track.dill
+/.dart_tool/chrome-device/Default/Local Storage/leveldb/000003.log
+/.dart_tool/chrome-device/Default/Network/Network Persistent State
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/f3ab1e1292e135fa_0
+/.dart_tool/chrome-device/Default/Network Action Predictor
+/.dart_tool/chrome-device/Default/Sessions/Session_13383362800089113
+/.dart_tool/chrome-device/Default/Sessions/Tabs_13383362800256939
+*.vsidx
+/testDesign/WebApplication1/bin/Debug/net8.0/testDesign.dll
+/testDesign/WebApplication1/bin/Debug/net8.0/testDesign.exe
+/testDesign/WebApplication1/bin/Debug/net8.0/testDesign.pdb
+/testDesign/WebApplication1/obj/Debug/net8.0/ref/testDesign.dll
+/testDesign/WebApplication1/obj/Debug/net8.0/refint/testDesign.dll
+/testDesign/WebApplication1/obj/Debug/net8.0/ApiEndpoints.json
+/testDesign/WebApplication1/obj/Debug/net8.0/apphost.exe
+/testDesign/WebApplication1/obj/Debug/net8.0/testDesign.AssemblyInfo.cs
+/testDesign/WebApplication1/obj/Debug/net8.0/testDesign.AssemblyInfoInputs.cache
+/testDesign/WebApplication1/obj/Debug/net8.0/testDesign.dll
+/testDesign/WebApplication1/obj/Debug/net8.0/testDesign.pdb
+/testDesign/WebApplication1/obj/Debug/net8.0/testDesign.sourcelink.json
+/.dart_tool/chrome-device/Default/Extension Rules/LOG
+/.dart_tool/chrome-device/Default/Extension Scripts/LOG
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/013888a1cda32b90_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/08b99d499107ba17_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/0ae129c33e7a30bd_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/297ecea5cebb5dfe_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/2cc80dabc69f58b6_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/4cb013792b196a35_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/67a473248953641b_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/7b4fd8111178d5b1_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/b6c28cea6ed9dfc1_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/ba23d8ecda68de77_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/d0757ff92c7cde0a_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/f1cdccba37924bda_0
+/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/fa813c9ad67834ac_0
+/build/5a7c4df422653be78e79a5d8e5680cfe/gen_dart_plugin_registrant.stamp
+/build/5a7c4df422653be78e79a5d8e5680cfe/gen_localizations.stamp
+/build/5a7c4df422653be78e79a5d8e5680cfe/_composite.stamp
+/.dart_tool/chrome-device/Default/Sessions/Session_13383710303842998
+/.dart_tool/chrome-device/Default/Sessions/Session_13383710724533826
+/.dart_tool/chrome-device/Default/Sessions/Session_13383727465087472
+/.dart_tool/chrome-device/Default/Sessions/Session_13383794028612602
+/.dart_tool/chrome-device/Default/Sessions/Session_13383975859065015
+/.dart_tool/chrome-device/Default/Sessions/Session_13384323872171593
+/.dart_tool/chrome-device/Default/Sessions/Session_13384334952510195
+/.dart_tool/chrome-device/Default/Site Characteristics Database/000003.log
+/.dart_tool/chrome-device/Default/BrowsingTopicsState
+/.dart_tool/chrome-device/Default/README
+/.dart_tool/chrome-device/Default/Secure Preferences
+/.dart_tool/chrome-device/Default/Top Sites
+/.dart_tool/chrome-device/Default/Web Data
+/.dart_tool/package_config.json
+/.flutter-plugins-dependencies
+/testDesign/WebApplication1/obj/Debug/net8.0/testDesign.csproj.CoreCompileInputs.cache
+/.dart_tool/chrome-device/Default/Sessions/Session_13384591901039626
+/.dart_tool/chrome-device/Default/WebStorage/QuotaManager-journal
+*.json
+/.dart_tool/chrome-device/Default/chrome_cart_db/LOCK
+/.dart_tool/chrome-device/Default/chrome_cart_db/LOG
+/.dart_tool/chrome-device/Default/DIPS-shm
+/.dart_tool/chrome-device/Default/DIPS-wal
+/.dart_tool/chrome-device/Default/Sessions/Session_13384938875639068
+/testDesign/WebApplication1/Migrations/20250226063029_AddclassModel005.cs
+/testDesign/WebApplication1/Migrations/20250226063029_AddclassModel005.Designer.cs
+/testDesign/WebApplication1/Migrations/20250226063656_AddgoodModel001.cs
+/testDesign/WebApplication1/Migrations/20250226063656_AddgoodModel001.Designer.cs
+/testDesign/WebApplication1/Migrations/20250226064343_AddgoodModel002.cs
+/testDesign/WebApplication1/Migrations/20250226064343_AddgoodModel002.Designer.cs
+/testDesign/WebApplication1/Migrations/AppDbContextModelSnapshot.cs
+/.dart_tool/chrome-device/Default/chrome_cart_db/LOG.old
+/.dart_tool/chrome-device/Default/Sessions/Session_13385197073953968
+/testDesign/WebApplication1/Migrations/20250303062721_AddNotifycation001.cs
+/testDesign/WebApplication1/Migrations/20250303062721_AddNotifycation001.Designer.cs
+/testDesign/WebApplication1/Migrations/20250303072407_AddNotifycation002.cs
+/testDesign/WebApplication1/Migrations/20250303072407_AddNotifycation002.Designer.cs
+/.dart_tool/chrome-device/Default/Sessions/Session_13385526892080262
+/.dart_tool/chrome-device/Default/Sessions/Session_13385552829476993
+/.dart_tool/chrome-device/Default/Sessions/Session_13385608774664959
+/.dart_tool/chrome-device/Default/Sessions/Session_13385716761334427
