@@ -27,6 +27,7 @@ namespace testDesign.Controllers
             classModel.contentsnum = 0;
             classModel.contentid = RandomIdGenerator.GenerateRandomId();
             classModel.goodsid = RandomIdGenerator.GenerateRandomId();
+            classModel.userName = Database.userModel.First(f => f.name == classModel.useid).useName!;
             Database.classModels.Add(classModel);
             await Database.SaveChangesAsync();
             return CreatedAtAction(nameof(GetClassModel), new { id = classModel.id }, classModel);

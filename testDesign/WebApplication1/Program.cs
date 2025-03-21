@@ -14,6 +14,17 @@ namespace WebApplication1
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
                                  new MySqlServerVersion(new Version(8, 0, 26))));
+
+            // 添加 CORS 服务
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
             // Add services to the container.
             builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddRazorPages();
@@ -38,6 +49,9 @@ namespace WebApplication1
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            // 启用 CORS 中间件
+            app.UseCors("AllowAllOrigins");
 
             app.UseRouting();
 

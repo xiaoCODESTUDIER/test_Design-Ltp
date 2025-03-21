@@ -94,11 +94,13 @@ class _MapPageState extends State<MapPage> {
                 String content = contentController.text;
                 double x = position.dx;
                 double y = position.dy;
+                String thamed = '1';
                 String? useid = Provider.of<UserProvider>(context, listen: false).user ?? '默认用户名';
-                classModel newClass = classModel(title: title, content: content, x: x, y: y, eyes: 0, contentsnum: 0,contents: [], useid: useid, contentid: '', goodsid: '', goods: [], goodsnum: 0, badsnum: 0);
+                classModel newClass = classModel(title: title, content: content, x: x, y: y, eyes: 0, contentsnum: 0,contents: [], useid: useid, contentid: '', goodsid: '', goods: [], goodsnum: 0, badsnum: 0, thamed: thamed, createDate: DateTime.now(), userName: '');
                 try {
                   await _classModelService.addClassModel(newClass);
                   setState(() {
+                    _loadclassModel();
                     if (newClass.useid == _useid) {
                       _userClass.add(newClass);
                     } else {
@@ -236,7 +238,7 @@ class _MapPageState extends State<MapPage> {
                                       text: '查看数: ${pin.eyes}, 讨论数: ${pin.contentsnum}, 点赞数：${pin.goodsnum}, 点踩数：${pin.badsnum}, 发起者: '
                                     ),
                                     TextSpan(
-                                      text: '@${pin.useid}',
+                                      text: '@${pin.userName}',
                                       style: const TextStyle(color: Colors.red),
                                     )
                                   ]
@@ -299,7 +301,7 @@ class _MapPageState extends State<MapPage> {
                                     text: '查看数: ${pin.eyes}, 讨论数: ${pin.contentsnum}, 点赞数：${pin.goodsnum}, 点踩数：${pin.badsnum}，发起者:'
                                   ),
                                   TextSpan(
-                                    text: '@${pin.useid}',
+                                    text: '@${pin.userName}',
                                     style: const TextStyle(color: Colors.red),
                                   )
                                 ]

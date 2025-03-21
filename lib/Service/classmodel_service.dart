@@ -281,6 +281,9 @@ class classModel {
   String contentid;
   List<contentModel> contents;
   String useid;
+  String userName;
+  String thamed;
+  DateTime createDate;
 
   classModel({
     this.id, 
@@ -293,10 +296,13 @@ class classModel {
     required this.contentid,
     required this.contents, 
     required this.useid,
+    required this.userName,
     required this.goodsid,
     required this.goodsnum,
     required this.badsnum,
     required this.goods,
+    required this.thamed,
+    required this.createDate
     }
   );
 
@@ -320,7 +326,10 @@ class classModel {
       goodsid: json['goodsid'] as String,
       goodsnum: json['goodsnum'] as int,
       badsnum: json['badsnum'] as int,
-      goods: goods,
+      goods: goods, 
+      thamed: json['thamed'] as String, 
+      createDate: DateTime.now(), 
+      userName: json['userName'] as String,
     );
   }
   Map<String, dynamic> toJson() {
@@ -338,6 +347,9 @@ class classModel {
       'Contentid': contentid,
       'Contents': contents.map((contents) => contents.toJson()).toList(),
       'useid': useid,
+      'UserName': userName,
+      'Thamed': thamed,
+      'CreateDate': createDate.toIso8601String(),
     };
   }
 }
