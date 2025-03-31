@@ -11,5 +11,7 @@ namespace WebApplication1.Models
         public string password { get; set; }
         public string? email { get; set; }
         public string? useName { get; set; }
+
+        public string? avatarUrl { get; set; }
     }
 }

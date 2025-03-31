@@ -7,6 +7,7 @@ import 'package:test_dirve/main_fuction/mainpage_fuction/search_page.dart';
 import 'package:test_dirve/main.dart';
 // ignore: library_prefixes
 import 'package:test_dirve/fuction/menu_bar.dart' as customBar;
+import 'package:test_dirve/user_center_page/user_center_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -121,7 +122,7 @@ class _Test1Page extends State<Test1Page> {
           MapPage(),
           MainMunePage(),
           SearchPage(),
-          Center(child: Text('这是个人中心页面')),
+          UserCenterPage(),
         ]
       ),
       

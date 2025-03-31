@@ -21,6 +21,26 @@ class classmodel_service {
       throw Exception('获取数据失败，状态码：${response.statusCode}');
     }
   }
+  Future<List<classModel>> queryManuClassModel(String thamed) async {
+    final response = await http.post(
+      Uri.parse('$_baseUrl/QueryMenuPage?thamed=$thamed'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      List<classModel> classModels = body.map((item){
+        if (item is Map<String, dynamic>) {
+          return classModel.fromJson(item);
+        } else {
+          throw FormatException('无效的数据格式：期望 Map<String, dynamic>, 但实际为 ${item.runtimeType}');
+        }
+      }).toList();
+      return classModels;
+    } else {
+      throw Exception('查询失败，状态码：${response.statusCode}');
+    }
+  }
   Future<classModel> getClassModelById(int postId) async {
     final response = await http.get(Uri.parse('$_baseUrl/$postId'));
     if (response.statusCode == 200) {
@@ -282,11 +302,15 @@ class classModel {
   List<contentModel> contents;
   String useid;
   String userName;
+  String? avatarUrl;
   String thamed;
   DateTime createDate;
+  String? imageUrl;
 
   classModel({
     this.id, 
+    this.avatarUrl,
+    this.imageUrl,
     required this.title, 
     required this.content, 
     required this.x, 
@@ -330,6 +354,8 @@ class classModel {
       thamed: json['thamed'] as String, 
       createDate: DateTime.now(), 
       userName: json['userName'] as String,
+      avatarUrl: json['avatarUrl'] as String?,
+      imageUrl: json['imageUrl'] as String? ?? '',
     );
   }
   Map<String, dynamic> toJson() {
@@ -348,8 +374,10 @@ class classModel {
       'Contents': contents.map((contents) => contents.toJson()).toList(),
       'useid': useid,
       'UserName': userName,
+      'AvatarUrl': avatarUrl,
       'Thamed': thamed,
       'CreateDate': createDate.toIso8601String(),
+      'ImageUrl': imageUrl,
     };
   }
 }
@@ -423,5 +451,78 @@ class NotificationRequestModel {
       'UserId': userId,
       'Comment': comment,
     };
+  }
+}
+
+class UserModel {
+  int id;
+  String? name;
+  int level;
+  int isLock;
+  String? phoneNum;
+  String password;
+  String? email;
+  String? useName;
+  String? avatarUrl;
+
+  UserModel({
+    required this.id,
+    this.name,
+    required this.level,
+    required this.isLock,
+    this.phoneNum,
+    required this.password,
+    this.email,
+    this.useName,
+    this.avatarUrl,
+  });
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      level: json['level'] as int,
+      isLock: json['isLock'] as int,
+      phoneNum: json['phoneNum'] as String?,
+      password: json['password'] as String,
+      email: json['email'] as String?,
+      useName: json['useName'] as String?,
+      avatarUrl: json['avatarUrl'] as String?,
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'Id': id,
+      'name': name,
+      'level': level,
+      'isLock': isLock,
+      'phoneNum': phoneNum,
+      'password': password,
+      'email': email,
+      'useName': useName,
+      'avatarUrl': avatarUrl,
+    };
+  }
+  
+  UserModel copyWith({
+    int? id,
+    String? name,
+    String? useName,
+    String? phoneNum,
+    String? email,
+    String? password,
+    int? level,
+    int? isLock,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      useName: useName ?? this.useName,
+      phoneNum: phoneNum ?? this.phoneNum,
+      email: email ?? this.email,
+      level: level ?? this.level,
+      isLock: isLock ?? this.isLock, 
+      password: password ?? this.password,
+    );
   }
 }

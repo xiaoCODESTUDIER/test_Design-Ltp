@@ -1,7 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:test_dirve/fuction/option_selected.dart';
-import 'package:test_dirve/SpecialEffect/carousel_slider.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:test_dirve/Service/classmodel_service.dart';
+import 'package:test_dirve/edit_page_fuction/edit_page.dart';
 
 class MainMunePage extends StatefulWidget {
   const MainMunePage ({super.key});
@@ -11,15 +12,10 @@ class MainMunePage extends StatefulWidget {
 }
 
 class _MainMunePageState extends State<MainMunePage> with SingleTickerProviderStateMixin {
-  var selected = '';
-  int _selectedIndex = 0;
-  int _hoveredSectionIndex = -1;    //  新增状态变量，用于记录当前鼠标悬停的饼图区块
-  final List<double> values = [15, 35, 50];
-  final List<Color> colors = const [Color.fromARGB(255, 4, 212, 240), Color.fromARGB(255, 245, 165, 17), Colors.red];    //  存储随机颜色
+  int _selectedIndex = 0;  //  新增状态变量
   late AnimationController _animationController;
-  late Animation<double> _animation;
-  List<double> currentValues = [0, 0, 0];
-  bool _isAnimationComplete = false;
+  List<classModel> _posts = [];  // 存储从后端获取的帖子数据
+  final classmodel_service _classModelService = classmodel_service();
 
   @override
   void initState() {
@@ -28,24 +24,20 @@ class _MainMunePageState extends State<MainMunePage> with SingleTickerProviderSt
       duration: const Duration(seconds: 2),
       vsync: this,
     )..forward();
-    // final random = Random();    //  随机数
-    // for (int i = 0; i < values.length; i++) {
-    //   colors.add(Color.fromARGB(      //  随机生成浅蓝色变种颜色并进行存储
-    //     255,
-    //     135 + random.nextInt(120),
-    //     206 + random.nextInt(50),
-    //     250 + random.nextInt(6),
-    //   ));
-    // }
-    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          setState(() {
-            _isAnimationComplete = true;
-          });
-        }
+    _loadPost((_selectedIndex + 1).toString());
+  }
+
+  Future<void> _loadPost(String themeValue) async {
+    try {
+      final posts = await _classModelService.queryManuClassModel(themeValue);
+      setState(() {
+        _posts = posts;   // 更新数据
       });
-    _animationController.forward();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('加载失败: $e')),
+      );
+    }
   }
 
   @override
@@ -81,18 +73,75 @@ class _MainMunePageState extends State<MainMunePage> with SingleTickerProviderSt
           )
         ]
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const EditPage(),
+            )
+          );
+          // 如果返回结果不为空，刷新页面
+          if (result != null) {
+            final title = result['title'];
+            final content = result['content'];
+            final theme = result['theme'];
+
+            // 创建 classModel 对象
+            final classModel newClass = classModel(
+              title: title,
+              content: content,
+              x: 0,
+              y: 0,
+              eyes: 0,
+              contentsnum: 0,
+              contents: [],
+              useid: '默认用户名', // 这里假设用户ID为默认用户名，可以根据实际情况调整
+              contentid: '',
+              goodsid: '',
+              goods: [],
+              goodsnum: 0,
+              badsnum: 0,
+              thamed: theme.toString(),
+              createDate: DateTime.now(), 
+              userName: '默认用户名', // 这里假设用户名为默认用户名，可以根据实际情况调整
+              imageUrl: null,
+            );
+
+            // 调用 addClassModel 方法
+            await _classModelService.addClassModel(newClass);
+
+            // 重新加载数据
+            _loadPost(theme.toString());
+          }
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
+      )
     );
   }
 
   Widget _buildNavItem(IconData icon, String label, int index) {      // 左侧导航栏的方法
     return InkWell(
-      onTap: () {
+      onTap: () async {
         setState(() {
           _selectedIndex = index;     // 更新选中的导航项索引
-          _isAnimationComplete = false;     // 重置动画完成状态
           _animationController.reset();
           _animationController.forward();
         });
+
+        // 根据选中的主题调用后端接口
+        final themeValue = (index + 1).toString();  // 将索引转换为主题值
+        try {
+          final posts = await _classModelService.queryManuClassModel(themeValue);
+          setState(() {
+            _posts = posts;  // 更新数据
+          });
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('加载失败: $e')),
+          );
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),      // 设置内边距
@@ -109,26 +158,76 @@ class _MainMunePageState extends State<MainMunePage> with SingleTickerProviderSt
   }
 
   Widget _buildContent() {
-    switch (_selectedIndex) {
-      case 0:
-        
-      case 1:
-        
-      case 2:
-        
-      case 3:
-
-      case 4:
-
-      case 5:
-
-      case 6:
-
-      default:
-        return const Center(
-          child: Text('Unknown Page'),
-        );
+    if (_posts.isEmpty) {
+      return const Center(
+        child: Text('暂无帖子'),
+      );
     }
+
+    return ListView.builder(
+      itemCount: _posts.length,
+      itemBuilder: (context, index) {
+        final post = _posts[index];
+        return ListTile(
+          title: Text(post.title, style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                post.content.length > 55 ? '${post.content.substring(0, 55)}...}' : post.content,
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  if (post.imageUrl != null && post.imageUrl!.isNotEmpty)
+                    Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: NetworkImage(post.imageUrl!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                ]
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 12,
+                    backgroundImage: post.avatarUrl != null && post.avatarUrl!.isNotEmpty
+                      ? NetworkImage(post.avatarUrl!) as ImageProvider
+                      : const AssetImage('image/default_avatar.png'),
+                  ),
+                  const SizedBox(width: 8),
+                  RichText(
+                    text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                        const TextSpan(
+                          text: '发起者: '
+                        ),
+                        TextSpan(
+                          text: '@${post.userName}',
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                        TextSpan(
+                          text: '查看数: ${post.eyes}, 讨论数: ${post.contentsnum}, 点赞数：${post.goodsnum}, 点踩数：${post.badsnum},'
+                        )
+                      ]
+                    )
+                  ),
+                ]
+              ),
+            ]
+          )
+        );
+      }
+    );
   }
 }
 

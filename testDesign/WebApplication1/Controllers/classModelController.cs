@@ -16,10 +16,27 @@ namespace testDesign.Controllers
             Database = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<classModel>>> GetClassModel()
+        public ActionResult<IEnumerable<classModel>> GetClassModel()
         {
-            return await Database.classModels.ToListAsync();
+            var classModelList = Database.classModels.ToList();
+            foreach (var item in classModelList)
+            {
+                item.avatarUrl = Database.userModel.First(f => f.name == item.useid).avatarUrl;
+            }
+            return classModelList;
         }
+
+        [HttpPost("QueryMenuPage")]
+        public ActionResult<IEnumerable<classModel>> QueryClassModel(string thamed)
+        {
+            var classModelList = Database.classModels.Where(w => w.thamed == thamed).ToList();
+            foreach (var item in classModelList)
+            {
+                item.avatarUrl = Database.userModel.First(f => f.name == item.useid).avatarUrl;
+            }
+            return classModelList;
+        }
+
         [HttpPost]
         public async Task<ActionResult<classModel>> PostClassModel(classModel classModel)
         {
@@ -32,6 +49,7 @@ namespace testDesign.Controllers
             await Database.SaveChangesAsync();
             return CreatedAtAction(nameof(GetClassModel), new { id = classModel.id }, classModel);
         }
+
         [HttpPost("AddEyesCount")]
         public async Task AddEyeCount(int id)
         {
@@ -45,6 +63,7 @@ namespace testDesign.Controllers
             }
             await Database.SaveChangesAsync();
         }
+
         [HttpDelete("deleteClass")]
         public async Task<IActionResult> DeleteClassModel(int id)
         {
@@ -57,6 +76,7 @@ namespace testDesign.Controllers
             await Database.SaveChangesAsync();
             return NoContent();
         }
+
         [HttpGet("{postId}")]
         public IActionResult GetPost(int postId)
         {

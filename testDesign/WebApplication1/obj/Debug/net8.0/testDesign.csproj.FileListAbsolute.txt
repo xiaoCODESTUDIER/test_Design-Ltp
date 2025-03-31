@@ -352,3 +352,5 @@ E:\myHomework\test_Design-Ltp\testDesign\WebApplication1\obj\Debug\net8.0\refint
 E:\myHomework\test_Design-Ltp\testDesign\WebApplication1\obj\Debug\net8.0\testDesign.pdb
 E:\myHomework\test_Design-Ltp\testDesign\WebApplication1\obj\Debug\net8.0\testDesign.genruntimeconfig.cache
 E:\myHomework\test_Design-Ltp\testDesign\WebApplication1\obj\Debug\net8.0\ref\testDesign.dll
+E:\myHomework\test_Design-Ltp\testDesign\WebApplication1\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+E:\myHomework\test_Design-Ltp\testDesign\WebApplication1\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

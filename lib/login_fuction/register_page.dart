@@ -24,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isEmailRegistration = false;
   // 跟踪验证码是否已发送
   bool _isVerificationCodeSent = false;
+  bool _isChecked = false;
   Timer? _timer;
   int _start = 60;
   String _countdownText = '发送验证码';
@@ -52,6 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _emailCheckCodeErrorText = null;
       // 重置验证码发送状态
       _isVerificationCodeSent = false;
+      _isChecked = false;
       // 重置表单状态
       _formKey.currentState?.reset();
       // 重置倒计时
@@ -105,10 +107,11 @@ class _RegisterPageState extends State<RegisterPage> {
           setState(() {
             // 如果验证码已发送就设置为true
             _isVerificationCodeSent = true;
+            _isChecked = false;
             _startCountdown();  // 启动计时器
           });
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('发送验证码失败: ${response.statusCode}')),);
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('发送验证码失败: ${response.body}')),);
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('发送验证码失败: $e')),);
@@ -137,6 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
         // 你可以在这里重置验证码发送状态或其他操作
         setState(() {
           _isVerificationCodeSent = false; // 重置验证码发送状态
+          _isChecked = true;
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('验证码错误: ${response.statusCode}')),);
@@ -151,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> _register() async {
     if (_formKey.currentState!.validate()) {
-      if (!_isVerificationCodeSent) {
+      if (!_isChecked) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('请先发送并验证验证码')),);
         return;
       }

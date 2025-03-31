@@ -18,6 +18,8 @@
         public string useid { get; set; } = string.Empty;
         public string userName { get; set; } = string.Empty;
         public string contentid { get; set; } = string.Empty;
+        public string? avatarUrl { get; set; }
+        public string? imageUrl { get; set; }
         public List<contentModel> contents { get; set; } = new List<contentModel>();
     }
 }

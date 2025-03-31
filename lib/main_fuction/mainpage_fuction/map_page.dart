@@ -38,10 +38,12 @@ class _MapPageState extends State<MapPage> {
         _otherClass.clear();
         for (int i = 0; i < classModels.length; i++) {
           final pin = classModels[i];
-          if (pin.useid == _useid) {
-            _userClass.add(pin);
-          } else {
-            _otherClass.add(pin);
+          if (pin.x != 0 && pin.y != 0){
+            if (pin.useid == _useid) {
+              _userClass.add(pin);
+            } else {
+              _otherClass.add(pin);
+            }
           }
           _controller[i] = TextEditingController(text: pin.title);
         }
@@ -96,7 +98,7 @@ class _MapPageState extends State<MapPage> {
                 double y = position.dy;
                 String thamed = '1';
                 String? useid = Provider.of<UserProvider>(context, listen: false).user ?? '默认用户名';
-                classModel newClass = classModel(title: title, content: content, x: x, y: y, eyes: 0, contentsnum: 0,contents: [], useid: useid, contentid: '', goodsid: '', goods: [], goodsnum: 0, badsnum: 0, thamed: thamed, createDate: DateTime.now(), userName: '');
+                classModel newClass = classModel(title: title, content: content, x: x, y: y, eyes: 0, contentsnum: 0,contents: [], useid: useid, contentid: '', goodsid: '', goods: [], goodsnum: 0, badsnum: 0, thamed: thamed, createDate: DateTime.now(), userName: '', avatarUrl: null);
                 try {
                   await _classModelService.addClassModel(newClass);
                   setState(() {
@@ -229,20 +231,34 @@ class _MapPageState extends State<MapPage> {
                             },
                             child: ListTile(
                               tileColor: _highlightedIndex == index ? Colors.blue[100] : null,
-                              title: Text(pin.title),
-                              subtitle: RichText(
-                                text: TextSpan(
-                                  style: DefaultTextStyle.of(context).style,
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: '查看数: ${pin.eyes}, 讨论数: ${pin.contentsnum}, 点赞数：${pin.goodsnum}, 点踩数：${pin.badsnum}, 发起者: '
-                                    ),
-                                    TextSpan(
-                                      text: '@${pin.userName}',
-                                      style: const TextStyle(color: Colors.red),
+                              title: Text(pin.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                              subtitle: Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 12,
+                                    backgroundImage: pin.avatarUrl != null && pin.avatarUrl!.isNotEmpty
+                                      ? NetworkImage(pin.avatarUrl!) as ImageProvider
+                                      : const AssetImage('image/default_avatar.png'),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: DefaultTextStyle.of(context).style,
+                                      children: <TextSpan>[
+                                        const TextSpan(
+                                          text: '发起者: '
+                                        ),
+                                        TextSpan(
+                                          text: '@${pin.userName}',
+                                          style: const TextStyle(color: Colors.red),
+                                        ),
+                                        TextSpan(
+                                          text: '查看数: ${pin.eyes}, 讨论数: ${pin.contentsnum}, 点赞数：${pin.goodsnum}, 点踩数：${pin.badsnum},'
+                                        )
+                                      ]
                                     )
-                                  ]
-                                )
+                                  ),
+                                ]
                               ),
                               trailing: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -292,20 +308,34 @@ class _MapPageState extends State<MapPage> {
                           },
                           child: ListTile(
                             tileColor: _highlightedIndex == globalIndex ? Colors.blue[100] : null,
-                            title: Text(pin.title),
-                            subtitle: RichText(
-                              text: TextSpan(
-                                style: DefaultTextStyle.of(context).style,
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: '查看数: ${pin.eyes}, 讨论数: ${pin.contentsnum}, 点赞数：${pin.goodsnum}, 点踩数：${pin.badsnum}，发起者:'
-                                  ),
-                                  TextSpan(
-                                    text: '@${pin.userName}',
-                                    style: const TextStyle(color: Colors.red),
+                            title: Text(pin.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                            subtitle: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 12,
+                                  backgroundImage: pin.avatarUrl != null && pin.avatarUrl!.isNotEmpty
+                                    ? NetworkImage(pin.avatarUrl!) as ImageProvider
+                                    : const AssetImage('image/default_avatar.png'),
+                                ),
+                                const SizedBox(width: 8),
+                                RichText(
+                                  text: TextSpan(
+                                    style: DefaultTextStyle.of(context).style,
+                                    children: <TextSpan>[
+                                      const TextSpan(
+                                        text: '发起者: '
+                                      ),
+                                      TextSpan(
+                                        text: '@${pin.userName}',
+                                        style: const TextStyle(color: Colors.red),
+                                      ),
+                                      TextSpan(
+                                        text: '查看数: ${pin.eyes}, 讨论数: ${pin.contentsnum}, 点赞数：${pin.goodsnum}, 点踩数：${pin.badsnum},'
+                                      )
+                                    ]
                                   )
-                                ]
-                              )
+                                ),
+                              ]
                             ),
                             trailing:  const SizedBox.shrink(),
                           ),
