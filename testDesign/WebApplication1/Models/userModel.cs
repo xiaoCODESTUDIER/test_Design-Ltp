@@ -8,10 +8,12 @@ namespace WebApplication1.Models
         public int level { get; set; }
         public int isLock { get; set; }
         public string? phoneNum { get; set; }
-        public string password { get; set; }
+        public string password { get; set; } = string.Empty;
         public string? email { get; set; }
         public string? useName { get; set; }
 
         public string? avatarUrl { get; set; }
+
+        public DateTime createTime { get; set; }
     }
 }

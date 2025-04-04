@@ -22,36 +22,38 @@ class _SearchPageState extends State<SearchPage> {    // 搜索页面的状态�
     final url = Uri.parse(query);
     await launchUrl(url);
   }
-  Future<void> _fetchNews(String category, String query) async {
-    // final params = {
-    //   //'key': '0efa0fa0182a613a494f2d7b89382989',
-    //   'type': category,     // 搜索类别
-    // };
-    try{
-      //final uri = Uri.parse(apiUrl).replace(queryParameters: params);
-      final response = await http.get(Uri.parse(query));
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        //final items = data['result']['data'] as List<dynamic>;
-        final items = data['data'] as List<dynamic>;
-        setState(() {
-          _newsItems = items.map((item) {
-            return {
-              // 'title': item['title'],
-              // 'url': item['url'],
-              // 'thumbnail_pic_s': item['thumbnail_pic_s'],
-              'title': item['name'],
-              'url': item['url'],
-            };
-          }).toList();
-        });
-      } else {
-        throw Exception('Failed to load news: Status code ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Error fetching news: $e');
-    }
-  }
+
+  // Future<void> _fetchNews(String category, String query) async {
+  //   // final params = {
+  //   //   //'key': '0efa0fa0182a613a494f2d7b89382989',
+  //   //   'type': category,     // 搜索类别
+  //   // };
+  //   try{
+  //     //final uri = Uri.parse(apiUrl).replace(queryParameters: params);
+  //     final response = await http.get(Uri.parse(query));
+  //     if (response.statusCode == 200) {
+  //       final Map<String, dynamic> data = json.decode(response.body);
+  //       //final items = data['result']['data'] as List<dynamic>;
+  //       final items = data['data'] as List<dynamic>;
+  //       setState(() {
+  //         _newsItems = items.map((item) {
+  //           return {
+  //             // 'title': item['title'],
+  //             // 'url': item['url'],
+  //             // 'thumbnail_pic_s': item['thumbnail_pic_s'],
+  //             'title': item['name'],
+  //             'url': item['url'],
+  //           };
+  //         }).toList();
+  //       });
+  //     } else {
+  //       throw Exception('Failed to load news: Status code ${response.statusCode}');
+  //     }
+  //   } catch (e) {
+  //     throw Exception('Error fetching news: $e');
+  //   }
+  // }
+
   void _performSearch(String query) {     // 执行搜索的方法，调用 _launchUrl 方法
     _launchUrl(query);
   }
@@ -59,14 +61,14 @@ class _SearchPageState extends State<SearchPage> {    // 搜索页面的状态�
   void _selectCategory(String category, String query){
     setState(() {
       _selectedCategory = category;
-      _fetchNews(category, query);
+      //_fetchNews(category, query);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _fetchNews(_selectedCategory, _query);
+    //_fetchNews(_selectedCategory, _query);
   }
 
   @override

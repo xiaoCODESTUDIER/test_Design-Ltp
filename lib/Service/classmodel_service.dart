@@ -464,6 +464,7 @@ class UserModel {
   String? email;
   String? useName;
   String? avatarUrl;
+  DateTime createTime;
 
   UserModel({
     required this.id,
@@ -475,6 +476,7 @@ class UserModel {
     this.email,
     this.useName,
     this.avatarUrl,
+    required this.createTime,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -488,6 +490,7 @@ class UserModel {
       email: json['email'] as String?,
       useName: json['useName'] as String?,
       avatarUrl: json['avatarUrl'] as String?,
+      createTime: DateTime.now(), 
     );
   }
   Map<String, dynamic> toJson() {
@@ -501,6 +504,7 @@ class UserModel {
       'email': email,
       'useName': useName,
       'avatarUrl': avatarUrl,
+      'createTime': createTime.toIso8601String(),
     };
   }
   
@@ -513,6 +517,7 @@ class UserModel {
     String? password,
     int? level,
     int? isLock,
+    DateTime? createTime
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -523,6 +528,7 @@ class UserModel {
       level: level ?? this.level,
       isLock: isLock ?? this.isLock, 
       password: password ?? this.password,
+      createTime: createTime ?? this.createTime,
     );
   }
 }
